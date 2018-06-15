@@ -20,17 +20,17 @@ public class GuestDao {
 	}
 	
 	public List<GuestVo> selectAll() throws SQLException{
-		List<GuestVo> list =new ArrayList<GuestVo>();
-		String sql="select * from guest";
+		List<GuestVo> list=new ArrayList<GuestVo>();
+		String sql="SELECT * FROM GUEST";
 		try(Connection conn=MyOracle.getConnection()){
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			while(rs.next()){
 				GuestVo bean =new GuestVo(
-						rs.getInt("sabun")
-						,rs.getString("name")
-						,rs.getDate("nalja")
-						,rs.getInt("pay")
+						rs.getInt("sabun"),
+						rs.getString("name"),
+						rs.getDate("nalja"),
+						rs.getInt("pay")
 						);
 				log.debug(bean);
 				list.add(bean);
@@ -40,9 +40,9 @@ public class GuestDao {
 	}
 	
 	public GuestVo selectOne(int pk) throws SQLException{
-		GuestVo bean =new GuestVo();
-		String sql ="select * from guest where sabun=?";
-		try(Connection conn = MyOracle.getConnection()){
+		GuestVo bean = new GuestVo();
+		String sql="SELECT * FROM GUEST WHERE SABUN=?";
+		try(Connection conn=MyOracle.getConnection()){
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, pk);
 			rs=pstmt.executeQuery();
@@ -54,11 +54,11 @@ public class GuestDao {
 			}
 		}
 		log.debug(bean);
-		return bean;		
+		return bean;
 	}
 	
 	public void insertOne(GuestVo bean) throws SQLException{
-		String sql="insert into Guest values(?,?,sysdate,?)";
+		String sql="INSERT INTO GUEST VALUES (?,?,SYSDATE,?)";
 		try(Connection conn=MyOracle.getConnection()){
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, bean.getSabun());
@@ -69,7 +69,7 @@ public class GuestDao {
 	}
 	
 	public int updateOne(GuestVo bean) throws SQLException{
-		String sql="update guest set name=?,pay=? where sabun=?";
+		String sql="UPDATE GUEST SET NAME=?,PAY=? WHERE SABUN=?";
 		try(Connection conn=MyOracle.getConnection()){
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, bean.getName());
@@ -80,12 +80,11 @@ public class GuestDao {
 	}
 	
 	public int deleteOne(int pk) throws SQLException{
-		String sql="delete From guest where sabun=?";
+		String sql="DELETE FROM GUEST WHERE SABUN=?";
 		try(Connection conn=MyOracle.getConnection()){
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, pk);
 			return pstmt.executeUpdate();
 		}
 	}
-	
 }
