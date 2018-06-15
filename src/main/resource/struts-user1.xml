@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<package name="user1" namespace="/guest" extends="page1">
+		<action name="list" class="com.bit.struts2.action.GuestAction" method="list">
+			<result>/list.jsp</result>		
+		</action>
+		<action name="detail" class="com.bit.struts2.action.GuestAction" method="detail">
+			<result>/detail.jsp</result>
+		</action>
+		<action name="add" class="com.bit.struts2.action.GuestAction">
+			<result>/add.jsp</result>
+		</action>
+		<action name="insert" class="com.bit.struts2.action.GuestAction" method="add">
+			<result type="redirectAction">
+				<param name="actionName">list</param>
+				<param name="msg">success</param>
+			</result>
+		</action>
+	</package>
+</struts>
